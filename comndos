@@ -1,0 +1,119 @@
+//https://gist.github.com/leocomelli/2545add34e4fec21ec16
+
+git init //criar novo repositorio
+git add .gitignore //criar um arquivo .gitignore e lista nele o que vai ser ignorado
+git status //Verificar estado dos arquivos/diretórios
+git add meu_arquivo.txt //Adicionar um arquivo em específico
+git add meu_diretorio //Adicionar um diretório em específico
+git add . //Adicionar todos os arquivos/diretórios
+Adicionar um arquivo que esta listado no .gitignore (geral ou do repositório)//git add -f arquivo_no_gitignore.txt
+git commit meu_arquivo.txt //Comitar um arquivo
+git commit meu_arquivo.txt meu_outro_arquivo.txt //Comitar vários arquivos
+git commit meuarquivo.txt -m "minha mensagem de commit" //Comitar informando mensagem
+git rm meu_arquivo.txt //Remover arquivo
+git rm -r diretorio //Remover diretório
+git log //Exibir histórico
+git log --oneline //Exibir informações resumidas em uma linha (hash completa e comentário)
+git remote //Exibir os repositórios remotos
+git remote -v
+git remote add origin git@github.com:leocomelli/curso-git.git //Vincular repositório local com um repositório remoto
+git remote show origin //Exibir informações dos repositórios remotos
+git remote rename origin curso-git //Renomear um repositório remoto
+git remote rm curso-git //Desvincular um repositório remoto
+git push -u origin master //Enviar arquivos/diretórios para o repositório remoto obs.: O primeiro push de um repositório deve conter o nome do repositório remoto e o branch.
+git push //Os demais pushes não precisam dessa informação
+Atualizar repositório local de acordo com o repositório remoto
+git pull //Atualizar os arquivos no branch atual
+git fetch //Buscar as alterações, mas não aplica-las no branch atual
+git clone git@github.com:leocomelli/curso-git.git //Clonar um repositório remoto já existente
+-------------------------------------------------------------
+git branch //mostra os branch criado
+git branch nome_branch
+git checkout nome_branch //para acessar
+git checkout -b nome_branch //para criar e acessar
+git commit -m "descrição" depoi -> git merge nome_do_outro_branch //commit de juncao de duas branch
+git rebase titulo //adiciona os commits na master gerando uma unica linha
+obs.: O merge junta os trabalhos e gera um merge commit. O rebase aplica os commits de outra branch na branch atual.
+--------------------------------------------------------------
+Alternativa correta! Com o git checkout nós desfazemos uma alteração que ainda não foi adicionada ao index ou stage, 
+ou seja, antes do git add. Depois de adicionar com git add, para desfazer uma alteração, precisamos tirá-la deste 
+estado, com git reset. Agora, se já realizamos o commit, o comando git revert pode nos salvar.
+------------------------------------------------------------
+Alternativa correta! Quando precisamos pausar o desenvolvimento de alguma funcionalidade, ou correção, antes de 
+finalizar, talvez não seja interessante realizar um commit, pois o nosso código pode não estar funcionando ainda. 
+Nesse caso é interessante salvar o trabalho para podermos voltar a ele depois.
+git stash //salvar em local temporario
+git stash list// mostra o que esta salvo
+git stash apply 0//atualiza com o que foi salvo
+git stash drop//remove 
+git stash pop//apaga da stach e atualiza
+----------------------------------------------------------
+Alternativa correta! A descrição do comando git checkout --help, em uma tradução livre é: 
+"Atualizar os arquivos na working tree para ficarem na versão especificada. [...]". Basicamente, 
+podemos deixar o nosso código no estado do último commit de uma branch, de um commit específico, ou mesmo tags 
+(que veremos adiante).
+
+Chegou a hora de você pôr em prática o que foi visto na aula. Para isso, execute os passos listados abaixo.
+
+1) Na pasta que representa o seu projeto, faça uma alteração qualquer no arquivo index.html;
+
+2) Execute o git status e veja que há uma alteração para adicionar;
+
+3) Execute o comando git checkout -- index.html. Confira se sua alteração foi desfeita;
+
+4) Novamente, faça alguma alteração no arquivo index.html;
+
+5) Execute o comando git add index.html;
+
+6) Execute o comando git reset HEAD index.html para trazer o arquivo index.html de volta para a HEAD do projeto (remover do stage, que é o que será enviado para o commit);
+
+7) Repita o passo 3;
+
+8) Faça mais uma vez alguma alteração no código;
+
+9) Execute o comando git add index.html e o comando git commit -m "Alterando o código" para realizar um commit;
+
+10) Execute o comando git log e copie o hash deste commit recém criado;
+
+11) Rode o comando git revert {hash}, substituindo {hash} pelo hash que você copiou anteriormente;
+
+12) Confira que suas alterações foram desfeitas;
+
+13) Mude o nome do curso de Ansible para "Ansible: Infraestrutura como código";
+
+14) Execute o comando git stash para salvar estas alterações na stash;
+
+15) Altere o nome do curso de Kubernetes para "Kubernetes: Introdução a orquestração de containers";
+
+16) Execute o comando git add index.html e o comando git commit -m "Alterando o nome do curso de Kubernetes" para realizar um commit;
+
+17) Execute o comando git stash pop para trazer a última alteração da stash;
+
+18) Execute o comando git add index.html e o comando git commit -m "Alterando o nome do curso de Ansible" para realizar um commit;
+
+19) Execute o comando git push local master para enviar todas as suas alterações;
+
+20) Execute o comando git log --oneline para ver os commits de forma resumida. Copie o hash do commit de merge com a branch lista;
+
+21) Execute o comando git checkout {hash} substituindo {hash} pelo hash que você copiou;
+
+22) Veja que diversas alterações não estão mais presentes;
+
+23) Execute git checkout master para voltar à linha principal de desenvolvimento.
+--------------------------------------------------------------------
+Nesta aula, aprendemos:
+
+Que o Git pode nos ajudar a desfazer alterações que não vamos utilizar;
+Que, para desfazer uma alteração antes de adicioná-la para commit (com git add), podemos utilizar o comando git checkout -- <arquivos>;
+Que, para desfazer uma alteração após adicioná-la para commit, antes precisamos executar o git reset HEAD <arquivos> e depois podemos desfazê-las com git checkout -- <arquivos>;
+Que, para revertermos as alterações realizadas em um commit, o comando git revert pode ser a solução;
+Que o comando git revert gera um novo commit informando que alterações foram desfeitas;
+Que, para guardar um trabalho para retomá-lo posteriormente, podemos utilizar o git stash;
+Que, para visualizar quais alterações estão na stash, podemos utilizar o comando git stash list;
+Que, com o comando git stash apply <numero>, podemos aplicar uma alteração específica da stash;
+Que o comando git stash drop <numero> remove determinado item da stash;
+Que o comando git stash pop aplica e remove a última alteração que foi adicionada na stash;
+Que o git checkout serve para deixar a cópia do código da nossa aplicação no estado que desejarmos:
+git checkout <branch> deixa o código no estado de uma branch com o nome <branch>;
+git checkout <hash> deixa o código no estado do commit com o hash <hash>.
+-----------------------------------------------------------------------------
