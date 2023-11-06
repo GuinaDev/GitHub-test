@@ -26,6 +26,8 @@ Atualizar repositório local de acordo com o repositório remoto
 git pull //Atualizar os arquivos no branch atual
 git fetch //Buscar as alterações, mas não aplica-las no branch atual
 git clone git@github.com:leocomelli/curso-git.git //Clonar um repositório remoto já existente
+git clone /D:/desenvolvimento/cursogit/serverTest/ projeto
+
 -------------------------------------------------------------
 git branch //mostra os branch criado
 git branch nome_branch
